@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Intro section with dropdown navigation | CodeTribe</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <img src="./images/logo.svg" alt="Logo" class="logo" />
+
+      <button class="btn-icon mobile-only" id="open-menu" aria-label="Open menu">
+        <img src="./images/icon-menu.svg" alt="Open menu" />
+      </button>
+
+      <nav class="main-nav" aria-label="Primary Navigation">
+        <ul class="nav-list">
+          <li class="nav-item has-dropdown">
+            <button class="nav-link dropdown-toggle" data-dropdown="features">
+              Features <img src="./images/icon-arrow-down.svg" alt="" class="icon-arrow" />
+            </button>
+            <ul class="dropdown" id="features">
+              <li class="dropdown-item"><a href="#"><img src="./images/icon-todo.svg" alt=""> Todo</a></li>
+              <li class="dropdown-item"><a href="#"><img src="./images/icon-calendar.svg" alt=""> Calendar</a></li>
+              <li class="dropdown-item"><a href="#"><img src="./images/icon-reminders.svg" alt=""> Reminders</a></li>
+              <li class="dropdown-item"><a href="#"><img src="./images/icon-planning.svg" alt=""> Planning</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item has-dropdown">
+            <button class="nav-link dropdown-toggle" data-dropdown="company">
+              Company <img src="./images/icon-arrow-down.svg" alt="" class="icon-arrow" />
+            </button>
+            <ul class="dropdown" id="company">
+              <li class="dropdown-item"><a href="#">History</a></li>
+              <li class="dropdown-item"><a href="#">Our team</a></li>
+              <li class="dropdown-item"><a href="#">Blog</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item"><a class="nav-link" href="#">Careers</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+        </ul>
+      </nav>
+
+      <div class="auth desktop-only">
+        <a class="login-link" href="#">Login</a>
+        <a class="btn btn-primary" href="#">Register</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile menu overlay -->
+  <div class="mobile-overlay hidden" id="mobile-overlay" aria-hidden="true">
+    <aside class="mobile-panel" role="dialog" aria-label="Mobile Menu">
+      <button class="btn-icon close-btn" id="close-menu" aria-label="Close menu">
+        <img src="./images/icon-close-menu.svg" alt="Close menu" />
+      </button>
+
+      <ul class="mobile-nav">
+        <li class="mobile-item">
+          <button class="mobile-toggle" data-dropdown="m-features">
+            Features <img src="./images/icon-arrow-down.svg" alt="" class="icon-arrow" />
+          </button>
+          <ul class="mobile-sub" id="m-features">
+            <li><a href="#"><img src="./images/icon-todo.svg" alt=""> Todo</a></li>
+            <li><a href="#"><img src="./images/icon-calendar.svg" alt=""> Calendar</a></li>
+            <li><a href="#"><img src="./images/icon-reminders.svg" alt=""> Reminders</a></li>
+            <li><a href="#"><img src="./images/icon-planning.svg" alt=""> Planning</a></li>
+          </ul>
+        </li>
+
+        <li class="mobile-item">
+          <button class="mobile-toggle" data-dropdown="m-company">Company <img src="./images/icon-arrow-down.svg" alt="" class="icon-arrow" /></button>
+          <ul class="mobile-sub" id="m-company">
+            <li><a href="#">History</a></li>
+            <li><a href="#">Our team</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </li>
+
+        <li class="mobile-item"><a href="#">Careers</a></li>
+        <li class="mobile-item"><a href="#">About</a></li>
+      </ul>
+
+      <div class="mobile-auth">
+        <a href="#" class="login-link">Login</a>
+        <a href="#" class="btn btn-primary">Register</a>
+      </div>
+    </aside>
+  </div>
+
+  <main>
+    <section class="hero container">
+      <div class="hero-text">
+        <h1>Make remote work</h1>
+        <p>Get your team in sync, no matter your location. Streamline processes, create team rituals, and watch productivity soar.</p>
+        <a class="btn btn-primary cta" href="#">Learn more</a>
+      </div>
+
+      <div class="hero-visual">
+        <img src="./images/image-hero-desktop.png" alt="People working remotely" class="hero-img" />
+      </div>
+    </section>
+  </main>
+
+  <div class="attribution">
+    Bootcamp 2023 by <a href="https://www.mlab.co.za" target="_blank" rel="noopener">CodeTribe</a>.
+    Developed by <a href="#">Your Name Here</a>.
+  </div>
+
+  <script>
+    // Mobile menu open/close
+    const openMenuBtn = document.getElementById('open-menu');
+    const closeMenuBtn = document.getElementById('close-menu');
+    const mobileOverlay = document.getElementById('mobile-overlay');
+
+    openMenuBtn.addEventListener('click', () => {
+      mobileOverlay.classList.remove('hidden');
+      mobileOverlay.setAttribute('aria-hidden', 'false');
+    });
+
+    closeMenuBtn.addEventListener('click', () => {
+      mobileOverlay.classList.add('hidden');
+      mobileOverlay.setAttribute('aria-hidden', 'true');
+    });
+
+    // Mobile dropdown toggles
+    document.querySelectorAll('.mobile-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-dropdown');
+        const menu = document.getElementById(id);
+        menu.classList.toggle('open');
+        btn.classList.toggle('open');
+      });
+    });
+
+    // Desktop dropdown show/hide on click (accessible)
+    document.querySelectorAll('.dropdown-toggle').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = btn.getAttribute('data-dropdown');
+        document.querySelectorAll('.dropdown').forEach(d => {
+          if (d.id === id) d.classList.toggle('open');
+          else d.classList.remove('open');
+        });
+      });
+    });
+
+    // Close open dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+      const isDropdown = e.target.closest('.has-dropdown');
+      if (!isDropdown) {
+        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
+      }
+    });
+  </script>
+</body>
+</html>
